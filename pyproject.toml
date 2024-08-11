@@ -1,7 +1,7 @@
 # pyproject.toml
 
 [tool.poetry]
-name = "your-bot"
+name = "Hamkeygen kalip bot"
 version = "0.1.0"
 description = "A Telegram bot for key generation"
 authors = ["Your Name <your.email@example.com>"]
