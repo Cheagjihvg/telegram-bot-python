@@ -9,5 +9,5 @@
   command = "poetry run python main.py"
 
 [env]
-  TELEGRAM_BOT_TOKEN = {7259089235:AAEwe-y7srP0lHKKrY-sNURTiUOP2lqaTjw}
+  TELEGRAM_BOT_TOKEN = "7259089235:AAEwe-y7srP0lHKKrY-sNURTiUOP2lqaTjw"
   PROXY_FILE_PATH = "proxy.txt"
