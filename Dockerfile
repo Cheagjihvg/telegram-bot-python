@@ -1,19 +1,23 @@
-FROM python:3.10
+# Use an official Python runtime as a parent image
+FROM python:3.10-slim
 
-# Set working directory
+# Set the working directory in the container
 WORKDIR /app
-
-# Copy only the poetry files first for caching purposes
-COPY pyproject.toml poetry.lock ./
 
 # Install Poetry
 RUN pip install poetry
 
-# Install dependencies
-RUN poetry install --no-dev
+# Copy pyproject.toml and poetry.lock to the container
+COPY pyproject.toml poetry.lock ./
 
-# Copy the rest of the application
+# Install the project dependencies
+RUN poetry install --no-dev --no-interaction --no-ansi
+
+# Copy the rest of the application code
 COPY . .
 
-# Set the command to run your application
+# Expose port (if your app runs on a specific port)
+EXPOSE 8000
+
+# Run the application
 CMD ["poetry", "run", "python", "main.py"]
