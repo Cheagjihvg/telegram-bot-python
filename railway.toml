@@ -1,5 +1,13 @@
+# railway.toml
+
 [build]
-builder = "nixpacks"
+  # Specify the build command if needed
+  command = "poetry install"
 
 [deploy]
-startCommand = "poetry run python main.py"
+  # Specify the deploy command if needed
+  command = "poetry run python main.py"
+
+[env]
+  TELEGRAM_BOT_TOKEN = {your_telegram_bot_token}
+  PROXY_FILE_PATH = "proxy.txt"
