@@ -1,1 +1,20 @@
+# .gitignore
+
+# Environment variable files
 .env
+.env.*
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Docker
+docker-compose.override.yml
+
+# Poetry
+poetry.lock
+
+# Logs
+*.log
