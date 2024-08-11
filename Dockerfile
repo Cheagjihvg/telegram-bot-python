@@ -1,22 +1,19 @@
-# Dockerfile
+FROM python:3.10
 
-FROM python:3.10-slim
-
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
-# Create and set working directory
+# Set working directory
 WORKDIR /app
 
-# Install dependencies
-COPY pyproject.toml poetry.lock /app/
-RUN pip install --upgrade pip
+# Copy only the poetry files first for caching purposes
+COPY pyproject.toml poetry.lock ./
+
+# Install Poetry
 RUN pip install poetry
+
+# Install dependencies
 RUN poetry install --no-dev
 
 # Copy the rest of the application
-COPY . /app/
+COPY . .
 
-# Run the application
+# Set the command to run your application
 CMD ["poetry", "run", "python", "main.py"]
