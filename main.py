@@ -1,20 +1,26 @@
+# main.py
+
 import os
-import telebot
 from dotenv import load_dotenv
+from telegram.ext import Application, CommandHandler
+from commands import start, game_choice, key_count, proxy_file_path
 
 # Load environment variables
 load_dotenv()
 
-# Replace 'TELEGRAM_BOT_TOKEN' with the token you received from BotFather
-TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
-bot = telebot.TeleBot(TOKEN)
+def main() -> None:
+    # Initialize Telegram bot
+    token = os.getenv("TELEGRAM_BOT_TOKEN")
+    application = Application.builder().token(token).build()
 
-@bot.message_handler(commands=['start', 'hello'])
-def send_welcome(message):
-    bot.reply_to(message, "Hello! I'm a simple Telegram bot.")
+    # Register handlers
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("game_choice", game_choice))
+    application.add_handler(CommandHandler("key_count", key_count))
+    application.add_handler(CommandHandler("proxy_file_path", proxy_file_path))
 
-@bot.message_handler(func=lambda msg: True)
-def echo_all(message):
-    bot.reply_to(message, message.text)
+    # Run the bot
+    application.run_polling()
 
-bot.polling()
+if __name__ == '__main__':
+    main()
